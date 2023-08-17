@@ -1,7 +1,7 @@
 import keyboard
 import time
 from PIL import ImageGrab
-
+import uploadmongo
 def take_screenshot():
     # Get the current time for naming the screenshot
     timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
@@ -12,6 +12,7 @@ def take_screenshot():
     # Save the screenshot
     screenshot.save(f"screenshot_{timestamp}.png")
     print(f"Screenshot saved as screenshot_{timestamp}.png")
+    uploadmongo.trigger()
 
 def main():
     print("Press a + S to take a screenshot.")
