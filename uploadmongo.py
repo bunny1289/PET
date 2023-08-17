@@ -1,8 +1,7 @@
-from pymongo import MongoClient
+# from pymongo import MongoClient
 import os
-def trigger():
-    client = MongoClient("mongodb+srv://karthikm20:12345677@cluster0.qrb6qry.mongodb.net/?retryWrites=true&w=majority")
-    db = client.your_database_name 
+from mongoConnection import db
+def trigger(ex):
     imagename = ""
     k = os.listdir()
     for x in k:
@@ -15,7 +14,7 @@ def trigger():
     with open(imagename, "rb") as photo_file:
         photo_data = photo_file.read()
 
-    photo_collection = db.photos 
+    photo_collection = db[ex] 
     photo_document = {"photo": photo_data}
 
     inserted_document = photo_collection.insert_one(photo_document)
@@ -28,4 +27,11 @@ def trigger():
     except OSError as e:
         # print(f"Error removing file {file_path}: {e}")
         pass
+    
+    for x in k:
+        try:
+            if x.split('.')[1] == "png":
+                trigger()
+        except:
+            pass
 

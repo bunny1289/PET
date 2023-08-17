@@ -1,9 +1,6 @@
-from pymongo import MongoClient
-
-client = MongoClient("mongodb+srv://karthikm20:12345677@cluster0.qrb6qry.mongodb.net/?retryWrites=true&w=majority")
-db = client.your_database_name  # Replace "your_database_name" with the actual database name
-
-photo_collection = db.photos
+# Replace "your_database_name" with the actual database name
+from mongoConnection import db
+photo_collection = db['photos']
 retrieved_document = photo_collection.find_one()
 retrieved_photo_data = retrieved_document["photo"]
 
